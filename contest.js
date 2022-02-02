@@ -84,8 +84,8 @@ function onCaptcha(captcha) {
             .getElementsByClassName("message  firstPost  ")[0].dataset.author
         return false;
     })    
-    createButton("Math", function () {
-		let calc = eval(question.toLowerCase().replace("x", "*").replace("\\", "/").replace("--", "-").replace("умножить на", "*").replace("умножить", "*").replace("поделить на", "/").replace("поделить", "/").replace("плюс", "+").replace("минус", "-").replace(/[^-()\d/*+.]/g, ''));
+	createButton("Math", function () {
+		let calc = eval(question.toLowerCase().replace("x", "*").replace("\\", "/").replace("--", "-").replace("умножить на", "*").replace("умножить", "*").replace("поделить", "/").replace("поделить на", "/").replace("плюс", "+").replace("минус", "-").replace(/[^-()\d/*+.]/g, ''));
 		captcha.children.CaptchaQuestionAnswer.value = (calc === undefined) ? "" : calc;
         return false;
     })
@@ -110,19 +110,24 @@ function onCaptcha(captcha) {
     let threadid = window.location.pathname.match("/threads/([0-9]+)/")[1]
 
     chrome.runtime.onMessage.addListener(request => {
+		console.log(already_got_answer)
+		console.log(request.response._redirectStatus)
+		console.log(request.response._redirectMessage)
+		console.log(request.request.captcha_type)
         if (!already_got_answer
             && request.response._redirectStatus === "ok"
             && request.response._redirectMessage === "Успешно! Вы участвуете розыгрыше."
             && request.request.captcha_type === "AnswerCaptcha") {
             const XHR = new XMLHttpRequest(),
                 params = new URLSearchParams();
-
+			
+			console.log(threadid)
             params.append("id", threadid);
             params.append("q", decodeURI(question));
             if (hint_letter) {
                 params.append("l", decodeURI(hint_letter));
             }
-            params.append("a", decodeURI(request.request.captcha_question_answer));
+            params.append("a", decodeURI(request.request.captcha_question_answer).replace("+", " "));
             XHR.responseType = 'json';
             XHR.onload = function (event) {
                 console.log(XHR)
