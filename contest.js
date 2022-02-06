@@ -127,13 +127,14 @@ function onCaptcha(captcha) {
             if (hint_letter) {
                 params.append("l", decodeURI(hint_letter));
             }
-            params.append("a", decodeURI(request.request.captcha_question_answer).replace("+", " "));
+            params.append("a", decodeURI(request.request.captcha_question_answer).replace(/\+/g, " "));
             XHR.responseType = 'json';
             XHR.onload = function (event) {
                 console.log(XHR)
                 if (XHR.readyState === XHR.DONE) {
                     if (XHR.status === 200) {
                         console.log("ok")
+						newlabel.innerHTML = "OK"
                     } else {
                         alert('Ошибка отправки ответа. Больше информации в консоле');
                     }
