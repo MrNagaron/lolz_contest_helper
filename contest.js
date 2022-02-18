@@ -127,7 +127,7 @@ function onCaptcha(captcha) {
             if (hint_letter) {
                 params.append("l", decodeURI(hint_letter));
             }
-            params.append("a", decodeURI(request.request.captcha_question_answer).replace(/\+/g, " "));
+            params.append("a", decodeURI(request.request.captcha_question_answer).replace(/\+/g, " ").replace(/%24/g, "$").replace(/%40/g, "@"));
             XHR.responseType = 'json';
             XHR.onload = function (event) {
                 console.log(XHR)
