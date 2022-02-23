@@ -26,6 +26,7 @@ function request_answer(thread, question, letter) {
                         document.getElementsByClassName("LztContest--Participate")[0].style["background-color"] = "red"
                     } else if (XHR.response["status"] === 0) {
                         captcha.children.CaptchaQuestionAnswer.value = XHR.response["answer"]
+						document.getElementsByClassName("LztContest--Participate")[0].click()
                     } else {
                         newlabel.innerHTML = newlabel.innerHTML + "<br>Неизвестный статус ответа."
                     }
@@ -42,18 +43,6 @@ function request_answer(thread, question, letter) {
         alert('Ошибка соеденения с сервером. Больше информации в консоле');
         console.log(event)
     });
-
-/* 	try {
-		// По идеи .replace(/[^-()\d/*+.]/g, '') должен обезопасить eval от лишнего мусора (Вдруг, кто-то в вопросе сделает код для JS)
-		already_got_answer = 0;
-		let calc = eval(question.toLowerCase().replace("x", "*").replace("\\", "/").replace("--", "-").replace("умножить на", "*").replace("умножить", "*").replace("поделить", "/").replace("поделить на", "/").replace("плюс", "+").replace("минус", "-").replace(/[^-()\d/*+.]/g, ''));
-		captcha.children.CaptchaQuestionAnswer.value = (calc === undefined) ? "" : calc;					
-		newlabel.innerHTML = newlabel.innerHTML + "<br>Этот ответ был найден с помощью вопроса. Он может быть не верный"
-		document.getElementsByClassName("LztContest--Participate")[0].style["background-color"] = "red"
-	}catch (e) {
-		console.log("No match question.");
-		console.log(e);
-	} */
 
     XHR.open('GET', 'https://answers.acuifex.ru/query.php?' + params.toString());
     XHR.send();
