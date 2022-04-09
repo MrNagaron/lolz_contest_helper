@@ -13,6 +13,7 @@
 Если выдаёт ошибку при открытии розыгрыша установите расширение
 https://chrome.google.com/webstore/detail/allow-cors-access-control/lhobafahddgcelffkeicbaginigeejlf
 И включите его
+
 ![image](https://user-images.githubusercontent.com/37413487/162582120-3d2853e5-5f35-45fa-8b12-7cd72e62e982.png)
 
 Внимание! Рекомендуется отключать данное расширение если вы работаете с другими сайтами! (Ибо на ют может не грузиться видео)
