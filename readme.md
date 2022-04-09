@@ -9,6 +9,7 @@
 5. Нажимаем `загрузить распакованное расширение`
 6. Выбираем папку из пункта 2
 
+# В случае ошибки в розыгрыше 
 Если выдаёт ошибку при открытии розыгрыша установите расширение
 https://chrome.google.com/webstore/detail/allow-cors-access-control/lhobafahddgcelffkeicbaginigeejlf
 И включите его
